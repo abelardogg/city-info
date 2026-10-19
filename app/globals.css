@@ -52,6 +52,11 @@
   outline: none;
 }
 
+.leaflet-container path:focus:not(:focus-visible),
+.leaflet-interactive:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .leaflet-control-attribution {
   background: rgba(238, 242, 236, 0.86) !important;
   color: var(--color-tenue) !important;
