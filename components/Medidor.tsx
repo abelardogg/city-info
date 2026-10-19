@@ -17,7 +17,7 @@ export default function Medidor({ puntaje, tamano = 116 }: Props) {
       className="relative shrink-0"
       style={{ width: tamano, height: tamano }}
       role="img"
-      aria-label={`Índice de dificultad ${puntaje} de 100, nivel ${nivel.etiqueta}`}
+      aria-label={`Difficulty score ${puntaje} out of 100, ${nivel.etiqueta} level`}
     >
       <svg
         width={tamano}
@@ -30,7 +30,7 @@ export default function Medidor({ puntaje, tamano = 116 }: Props) {
           cy={tamano / 2}
           r={radio}
           fill="none"
-          stroke="rgba(240,234,224,0.09)"
+          stroke="rgba(22,33,27,0.1)"
           strokeWidth="9"
           strokeLinecap="round"
           strokeDasharray={`${vuelta * arco} ${vuelta}`}
@@ -49,7 +49,7 @@ export default function Medidor({ puntaje, tamano = 116 }: Props) {
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span className="tabular text-3xl font-semibold leading-none">{puntaje}</span>
         <span className="mt-1 text-[10px] uppercase tracking-[0.16em] text-tenue">
-          de 100
+          out of 100
         </span>
       </div>
     </div>

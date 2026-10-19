@@ -51,26 +51,33 @@ export default function Pagina() {
       previos.includes(id) ? previos.filter((nivel) => nivel !== id) : [...previos, id],
     )
 
+  const limpiarTodo = () => {
+    setConsulta("")
+    setSeleccionada(undefined)
+  }
+
   const vistas: { id: Vista; etiqueta: string; icono: typeof List }[] = [
-    { id: "lista", etiqueta: "Buscador", icono: List },
-    { id: "mapa", etiqueta: "Mapa", icono: MapaIcono },
+    { id: "lista", etiqueta: "Search", icono: List },
+    { id: "mapa", etiqueta: "Map", icono: MapaIcono },
   ]
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-6 sm:px-6 lg:py-8">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-acento">
-            <Mountain size={14} aria-hidden />
-            TrailInfo
-            <span className="text-tenue">· {ciudad.nombre}</span>
+          <p className="flex items-center gap-2 text-acento">
+            <Mountain size={17} strokeWidth={2.2} aria-hidden />
+            <span className="text-base font-semibold tracking-tight">TrailInfo</span>
+            <span className="text-xs uppercase tracking-[0.16em] text-tenue">
+              {ciudad.nombre}
+            </span>
           </p>
           <h1 className="mt-1.5 text-2xl font-semibold tracking-tight sm:text-3xl">
-            Senderos por escala de dificultad
+            Trails by difficulty scale
           </h1>
           <p className="mt-1 max-w-xl text-sm text-suave">
-            {rutas.length} rutas calificadas de 0 a 100 según desnivel, terreno, distancia,
-            exposición y autonomía.
+            {rutas.length} routes scored 0 to 100 on elevation gain, terrain, distance,
+            exposure and self-reliance.
           </p>
         </div>
 
@@ -99,6 +106,7 @@ export default function Pagina() {
           consulta={consulta}
           onConsulta={setConsulta}
           onElegir={elegir}
+          onLimpiar={limpiarTodo}
         />
         <Filtros
           activos={activos}
@@ -121,23 +129,29 @@ export default function Pagina() {
             onElegir={elegir}
           />
         ) : (
-          <Mapa rutas={resultados} seleccionada={seleccionada} onElegir={elegir} />
+          <Mapa
+            rutas={resultados}
+            seleccionada={seleccionada}
+            onElegir={elegir}
+            onLimpiarSeleccion={() => setSeleccionada(undefined)}
+          />
         )}
 
         <div ref={ficha} className="lg:sticky lg:top-6">
           <Ficha
             ruta={elegida}
             onVerMapa={vista === "lista" ? () => setVista("mapa") : undefined}
+            onCerrar={() => setSeleccionada(undefined)}
           />
         </div>
       </main>
 
       <footer className="mt-2 flex flex-wrap items-center justify-between gap-3 border-t border-borde pt-4 text-xs leading-relaxed text-tenue">
         <p>
-          TrailInfo · Distancias y desniveles según fuentes públicas de senderismo y
-          datos de los parques. Los trazos del mapa son orientativos.
+          TrailInfo · Distances and elevation gain from public trail sources and park
+          data. Map lines are indicative.
         </p>
-        <p>Consulta el estado del sendero y el clima antes de salir.</p>
+        <p>Check trail conditions and the forecast before you head out.</p>
       </footer>
     </div>
   )

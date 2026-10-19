@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-fondo: #0e1a13;
-  --color-bosque: #142419;
-  --color-panel: #251b13;
-  --color-panel-alto: #31241a;
-  --color-borde: rgba(240, 232, 218, 0.11);
-  --color-texto: #f2ece2;
-  --color-suave: #b5a895;
-  --color-tenue: #8a7e6d;
-  --color-acento: #e8ab3f;
-  --color-facil: #63c08e;
-  --color-moderado: #e3b641;
-  --color-dificil: #e28f3e;
-  --color-muy-dificil: #e0675a;
+  --color-fondo: #eef2ec;
+  --color-panel: #eef2ec;
+  --color-panel-alto: #e2e8de;
+  --color-panel-hondo: #d8e0d4;
+  --color-borde: #bdcab8;
+  --color-texto: #16211b;
+  --color-suave: #475549;
+  --color-tenue: #5c6a61;
+  --color-acento: #1f5135;
+  --color-facil: #27704a;
+  --color-moderado: #87640f;
+  --color-dificil: #a4511a;
+  --color-muy-dificil: #a93427;
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
@@ -21,51 +21,39 @@
 @layer base {
   body {
     background-color: var(--color-fondo);
-    background-image:
-      radial-gradient(
-        ellipse 90% 55% at 50% -12%,
-        rgba(99, 192, 142, 0.1),
-        transparent 72%
-      ),
-      linear-gradient(180deg, var(--color-bosque), var(--color-fondo) 55%);
+    background-image: radial-gradient(
+      ellipse 90% 55% at 50% -12%,
+      rgba(31, 81, 53, 0.1),
+      transparent 70%
+    );
     background-attachment: fixed;
     color: var(--color-texto);
     font-family: var(--font-sans);
   }
 
   ::selection {
-    background-color: rgba(232, 171, 63, 0.3);
+    background-color: rgba(31, 81, 53, 0.18);
   }
 }
 
 @utility panel {
   background-color: var(--color-panel);
+  border: 1px solid var(--color-borde);
   border-radius: 12px;
-  box-shadow: inset 0 0 0 1px var(--color-borde);
 }
 
 @utility tabular {
   font-variant-numeric: tabular-nums;
 }
 
-@utility relieve {
-  background-image: repeating-linear-gradient(
-    115deg,
-    rgba(255, 255, 255, 0.02) 0px,
-    rgba(255, 255, 255, 0.02) 1px,
-    transparent 1px,
-    transparent 7px
-  );
-}
-
 .leaflet-container {
-  background: #0b1510;
+  background: var(--color-panel-alto);
   font-family: var(--font-sans);
   outline: none;
 }
 
 .leaflet-control-attribution {
-  background: rgba(14, 26, 19, 0.85) !important;
+  background: rgba(238, 242, 236, 0.86) !important;
   color: var(--color-tenue) !important;
   font-size: 10px !important;
 }
@@ -85,10 +73,10 @@
 }
 
 .leaflet-tooltip {
-  background: var(--color-panel-alto) !important;
+  background: var(--color-panel) !important;
   border: 1px solid var(--color-borde) !important;
   color: var(--color-texto) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: 0 6px 18px rgba(22, 33, 27, 0.15) !important;
   font-size: 12px !important;
   padding: 5px 9px !important;
 }

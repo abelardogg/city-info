@@ -11,9 +11,10 @@ interface Props {
   consulta: string
   onConsulta: (valor: string) => void
   onElegir: (ruta: Ruta) => void
+  onLimpiar: () => void
 }
 
-export default function Buscador({ rutas, consulta, onConsulta, onElegir }: Props) {
+export default function Buscador({ rutas, consulta, onConsulta, onElegir, onLimpiar }: Props) {
   const [abierto, setAbierto] = useState(false)
   const [activo, setActivo] = useState(0)
   const contenedor = useRef<HTMLDivElement>(null)
@@ -71,18 +72,18 @@ export default function Buscador({ rutas, consulta, onConsulta, onElegir }: Prop
           }}
           onFocus={() => setAbierto(true)}
           onKeyDown={teclado}
-          placeholder="Buscar sendero, zona o parque…"
-          aria-label="Buscar sendero"
+          placeholder="Search a trail, area or park…"
+          aria-label="Search a trail"
           autoComplete="off"
           className="min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-tenue"
         />
         {consulta && (
           <button
             onClick={() => {
-              onConsulta("")
+              onLimpiar()
               setAbierto(false)
             }}
-            aria-label="Limpiar búsqueda"
+            aria-label="Clear search"
             className="shrink-0 rounded-md p-1 text-tenue transition-colors hover:bg-panel-alto hover:text-texto"
           >
             <X size={16} />
@@ -91,7 +92,7 @@ export default function Buscador({ rutas, consulta, onConsulta, onElegir }: Prop
       </div>
 
       {abierto && sugerencias.length > 0 && (
-        <ul className="absolute inset-x-0 top-full z-[1200] mt-2 overflow-hidden rounded-xl border border-borde bg-panel-alto shadow-2xl shadow-black/50">
+        <ul className="absolute inset-x-0 top-full z-[1200] mt-2 overflow-hidden rounded-xl border border-borde bg-panel shadow-xl shadow-texto/10">
           {sugerencias.map((ruta, posicion) => {
             const [antes, medio, despues] = resaltar(ruta.nombre, consulta)
             return (
@@ -100,7 +101,7 @@ export default function Buscador({ rutas, consulta, onConsulta, onElegir }: Prop
                   onMouseEnter={() => setActivo(posicion)}
                   onClick={() => elegir(ruta)}
                   className={`flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left transition-colors ${
-                    posicion === activo ? "bg-acento/10" : ""
+                    posicion === activo ? "bg-panel-alto" : ""
                   }`}
                 >
                   <span className="min-w-0">

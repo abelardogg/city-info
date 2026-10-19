@@ -18,10 +18,10 @@ interface Props {
 }
 
 const ordenes: { id: Orden; etiqueta: string }[] = [
-  { id: "indice-desc", etiqueta: "Más difícil primero" },
-  { id: "indice-asc", etiqueta: "Más fácil primero" },
-  { id: "distancia", etiqueta: "Mayor distancia" },
-  { id: "desnivel", etiqueta: "Mayor desnivel" },
+  { id: "indice-desc", etiqueta: "Hardest first" },
+  { id: "indice-asc", etiqueta: "Easiest first" },
+  { id: "distancia", etiqueta: "Longest" },
+  { id: "desnivel", etiqueta: "Most elevation gain" },
 ]
 
 export default function Filtros({
@@ -67,10 +67,10 @@ export default function Filtros({
         <select
           value={zona}
           onChange={(evento) => onZona(evento.target.value)}
-          aria-label="Filtrar por zona"
+          aria-label="Filter by area"
           className="rounded-lg border border-borde bg-panel px-2.5 py-1.5 text-xs text-suave outline-none transition-colors hover:text-texto focus:border-acento/60"
         >
-          <option value="">Todas las zonas</option>
+          <option value="">All areas</option>
           {zonas.map((nombre) => (
             <option key={nombre} value={nombre}>
               {nombre}
@@ -81,7 +81,7 @@ export default function Filtros({
         <select
           value={orden}
           onChange={(evento) => onOrden(evento.target.value as Orden)}
-          aria-label="Ordenar resultados"
+          aria-label="Sort results"
           className="rounded-lg border border-borde bg-panel px-2.5 py-1.5 text-xs text-suave outline-none transition-colors hover:text-texto focus:border-acento/60"
         >
           {ordenes.map((opcion) => (
@@ -92,7 +92,7 @@ export default function Filtros({
         </select>
 
         <span className="tabular text-xs text-tenue">
-          {mostrados} de {total}
+          {mostrados} of {total}
         </span>
       </div>
     </div>

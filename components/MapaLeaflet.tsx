@@ -67,10 +67,21 @@ export default function MapaLeaflet({ rutas, seleccionada, capa, onElegir }: Pro
           <Fragment key={ruta.id}>
             <Polyline
               positions={ruta.trazo}
+              interactive={false}
+              pathOptions={{
+                color: "#ffffff",
+                weight: elegida ? 10 : 8,
+                opacity: atenuada ? 0.3 : 0.75,
+                lineCap: "round",
+                lineJoin: "round",
+              }}
+            />
+            <Polyline
+              positions={ruta.trazo}
               pathOptions={{
                 color,
                 weight: elegida ? 6 : 4,
-                opacity: atenuada ? 0.35 : 0.95,
+                opacity: atenuada ? 0.4 : 1,
                 lineCap: "round",
                 lineJoin: "round",
               }}
@@ -86,10 +97,11 @@ export default function MapaLeaflet({ rutas, seleccionada, capa, onElegir }: Pro
               center={ruta.acceso}
               radius={elegida ? 8 : 6}
               pathOptions={{
-                color: "#0e1a13",
-                weight: 2,
+                color: "#ffffff",
+                weight: 2.5,
+                opacity: atenuada ? 0.5 : 1,
                 fillColor: color,
-                fillOpacity: atenuada ? 0.4 : 1,
+                fillOpacity: atenuada ? 0.45 : 1,
               }}
               eventHandlers={{ click: () => onElegir(ruta) }}
             >

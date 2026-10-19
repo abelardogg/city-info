@@ -1,6 +1,6 @@
 const esri = "https://server.arcgisonline.com/ArcGIS/rest/services"
 
-export type CapaId = "relieve" | "satelite"
+export type CapaId = "topografico" | "satelite"
 
 export interface Capa {
   id: CapaId
@@ -12,18 +12,18 @@ export interface Capa {
 
 export const capas: Capa[] = [
   {
-    id: "relieve",
-    etiqueta: "Mapa",
-    url: `${esri}/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}`,
-    etiquetas: `${esri}/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}`,
-    credito: "Teselas &copy; Esri &mdash; HERE, Garmin, OpenStreetMap y colaboradores",
+    id: "topografico",
+    etiqueta: "Map",
+    url: `${esri}/World_Topo_Map/MapServer/tile/{z}/{y}/{x}`,
+    credito:
+      "Tiles &copy; Esri &mdash; USGS, NOAA, HERE, Garmin, OpenStreetMap contributors",
   },
   {
     id: "satelite",
-    etiqueta: "Satélite",
+    etiqueta: "Satellite",
     url: `${esri}/World_Imagery/MapServer/tile/{z}/{y}/{x}`,
     etiquetas: `${esri}/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}`,
     credito:
-      "Teselas &copy; Esri &mdash; Maxar, Earthstar Geographics y la comunidad de usuarios SIG",
+      "Tiles &copy; Esri &mdash; Maxar, Earthstar Geographics and the GIS user community",
   },
 ]

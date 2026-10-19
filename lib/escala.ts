@@ -10,32 +10,32 @@ export interface Factor {
 export const factores: Factor[] = [
   {
     id: "desnivel",
-    etiqueta: "Desnivel",
-    descripcion: "Metros de ascenso acumulado. 900 m o más puntúa 100.",
+    etiqueta: "Elevation gain",
+    descripcion: "Total meters climbed. 900 m or more scores 100.",
     peso: 0.3,
   },
   {
     id: "terreno",
-    etiqueta: "Terreno",
-    descripcion: "Roca suelta, escalonado, trepadas y tramos expuestos.",
+    etiqueta: "Terrain",
+    descripcion: "Loose rock, steps, scrambling and exposed stretches.",
     peso: 0.25,
   },
   {
     id: "distancia",
-    etiqueta: "Distancia",
-    descripcion: "Kilómetros totales del recorrido. 21 km o más puntúa 100.",
+    etiqueta: "Distance",
+    descripcion: "Total length of the route. 21 km or more scores 100.",
     peso: 0.2,
   },
   {
     id: "exposicion",
-    etiqueta: "Exposición",
-    descripcion: "Sol directo, calor y falta de sombra en el trazo.",
+    etiqueta: "Exposure",
+    descripcion: "Direct sun, heat and lack of shade along the way.",
     peso: 0.15,
   },
   {
     id: "servicios",
-    etiqueta: "Autonomía",
-    descripcion: "Qué tanto depende de ti: agua, señal, señalización y rescate.",
+    etiqueta: "Self-reliance",
+    descripcion: "How much is on you: water, cell signal, waymarking and rescue.",
     peso: 0.1,
   },
 ]
@@ -53,7 +53,7 @@ export interface Nivel {
 export const niveles: Nivel[] = [
   {
     id: "facil",
-    etiqueta: "Fácil",
+    etiqueta: "Easy",
     desde: 0,
     color: "#5fb98a",
     claseTexto: "text-facil",
@@ -62,7 +62,7 @@ export const niveles: Nivel[] = [
   },
   {
     id: "moderado",
-    etiqueta: "Moderado",
+    etiqueta: "Moderate",
     desde: 25,
     color: "#e0b23a",
     claseTexto: "text-moderado",
@@ -71,7 +71,7 @@ export const niveles: Nivel[] = [
   },
   {
     id: "dificil",
-    etiqueta: "Difícil",
+    etiqueta: "Hard",
     desde: 50,
     color: "#e08a3a",
     claseTexto: "text-dificil",
@@ -80,7 +80,7 @@ export const niveles: Nivel[] = [
   },
   {
     id: "muy-dificil",
-    etiqueta: "Muy difícil",
+    etiqueta: "Very hard",
     desde: 75,
     color: "#d9594c",
     claseTexto: "text-muy-dificil",
@@ -97,7 +97,7 @@ export interface Ruta {
   distanciaKm: number
   desnivelM: number
   horas: number
-  tipo: "Ida y vuelta" | "Circuito" | "Punto a punto"
+  tipo: "Out and back" | "Loop" | "Point to point"
   acceso: [number, number]
   trazo: [number, number][]
   resumen: string

@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "TrailInfo — Senderos de El Paso por dificultad",
+  title: "TrailInfo — El Paso trails by difficulty",
   description:
-    "Buscador y mapa interactivo de los senderos de El Paso, Texas, con una escala de dificultad de 0 a 100 calculada a partir de desnivel, terreno, distancia, exposición y autonomía.",
+    "Search and interactive map of the trails around El Paso, Texas, each scored 0 to 100 on elevation gain, terrain, distance, exposure and self-reliance.",
 }
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body className="antialiased">{children}</body>
     </html>
   )

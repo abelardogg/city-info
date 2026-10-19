@@ -1,23 +1,24 @@
 "use client"
 
-import { Clock, Map, MapPin, Mountain, Route, Compass } from "lucide-react"
+import { Clock, Map, MapPin, Mountain, Route, Compass, X } from "lucide-react"
 import { desglose, indice, nivelDe, type Ruta } from "@/lib/escala"
 import Medidor from "./Medidor"
 
 interface Props {
   ruta?: Ruta
   onVerMapa?: () => void
+  onCerrar?: () => void
 }
 
-export default function Ficha({ ruta, onVerMapa }: Props) {
+export default function Ficha({ ruta, onVerMapa, onCerrar }: Props) {
   if (!ruta) {
     return (
       <div className="panel flex h-full min-h-56 flex-col items-center justify-center gap-2 px-6 py-10 text-center">
         <Compass size={22} className="text-tenue" aria-hidden />
-        <p className="text-sm text-suave">Elige un sendero para ver su ficha.</p>
+        <p className="text-sm text-suave">Pick a trail to see its card.</p>
         <p className="max-w-xs text-xs text-tenue">
-          Cada ficha desglosa de dónde sale el índice: cuánto aporta el desnivel, el terreno,
-          la distancia, la exposición y la autonomía.
+          Every card breaks the score apart: how much the elevation gain, the terrain, the
+          distance, the exposure and the self-reliance each add.
         </p>
       </div>
     )
@@ -28,14 +29,14 @@ export default function Ficha({ ruta, onVerMapa }: Props) {
   const partes = desglose(ruta)
 
   const datos = [
-    { icono: Route, etiqueta: "Distancia", valor: `${ruta.distanciaKm} km` },
-    { icono: Mountain, etiqueta: "Desnivel", valor: `${ruta.desnivelM} m` },
-    { icono: Clock, etiqueta: "Duración", valor: `${ruta.horas} h` },
-    { icono: MapPin, etiqueta: "Recorrido", valor: ruta.tipo },
+    { icono: Route, etiqueta: "Distance", valor: `${ruta.distanciaKm} km` },
+    { icono: Mountain, etiqueta: "Elevation", valor: `${ruta.desnivelM} m` },
+    { icono: Clock, etiqueta: "Time", valor: `${ruta.horas} h` },
+    { icono: MapPin, etiqueta: "Route", valor: ruta.tipo },
   ]
 
   return (
-    <article className="panel relieve flex flex-col overflow-hidden">
+    <article className="panel flex flex-col overflow-hidden">
       <header
         className="border-b border-borde px-5 py-4"
         style={{ backgroundColor: `${nivel.color}0f` }}
@@ -47,16 +48,27 @@ export default function Ficha({ ruta, onVerMapa }: Props) {
               {ruta.zona} · {ruta.parque}
             </p>
           </div>
-          <span
-            className="shrink-0 rounded-full border px-2.5 py-1 text-xs font-medium"
-            style={{
-              color: nivel.color,
-              borderColor: `${nivel.color}55`,
-              backgroundColor: `${nivel.color}1f`,
-            }}
-          >
-            {nivel.etiqueta}
-          </span>
+          <div className="flex shrink-0 items-center gap-2">
+            <span
+              className="rounded-full border px-2.5 py-1 text-xs font-medium"
+              style={{
+                color: nivel.color,
+                borderColor: `${nivel.color}55`,
+                backgroundColor: `${nivel.color}1f`,
+              }}
+            >
+              {nivel.etiqueta}
+            </span>
+            {onCerrar && (
+              <button
+                onClick={onCerrar}
+                aria-label="Close trail card"
+                className="rounded-md p-1 text-tenue transition-colors hover:bg-panel-alto hover:text-texto"
+              >
+                <X size={15} />
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
@@ -70,7 +82,7 @@ export default function Ficha({ ruta, onVerMapa }: Props) {
               className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-borde px-3 py-1.5 text-xs text-suave transition-colors hover:border-acento/50 hover:text-texto"
             >
               <Map size={13} aria-hidden />
-              Ver en el mapa
+              View on map
             </button>
           )}
         </div>
@@ -91,9 +103,9 @@ export default function Ficha({ ruta, onVerMapa }: Props) {
       <section className="px-5 py-5">
         <div className="flex items-baseline justify-between">
           <h3 className="text-xs uppercase tracking-[0.16em] text-tenue">
-            Cómo se forma el índice
+            How the score adds up
           </h3>
-          <span className="tabular text-xs text-tenue">factor × peso</span>
+          <span className="tabular text-xs text-tenue">factor × weight</span>
         </div>
 
         <ul className="mt-3 flex flex-col gap-3">
@@ -110,10 +122,10 @@ export default function Ficha({ ruta, onVerMapa }: Props) {
                   {Math.round(valor)} <span className="text-tenue">→ +{aporte.toFixed(1)}</span>
                 </span>
               </div>
-              <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-texto/8">
+              <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-texto/10">
                 <div
                   className="h-full rounded-full transition-[width] duration-500"
-                  style={{ width: `${valor}%`, backgroundColor: nivel.color, opacity: 0.55 }}
+                  style={{ width: `${valor}%`, backgroundColor: nivel.color, opacity: 0.7 }}
                 />
               </div>
               <p className="mt-1 text-[11px] leading-snug text-tenue">{factor.descripcion}</p>
@@ -122,7 +134,7 @@ export default function Ficha({ ruta, onVerMapa }: Props) {
         </ul>
 
         <p className="tabular mt-4 border-t border-borde pt-3 text-xs text-suave">
-          Índice ={" "}
+          Score ={" "}
           {partes.map(({ aporte }, posicion) => (
             <span key={posicion}>
               {posicion > 0 && " + "}
@@ -134,7 +146,7 @@ export default function Ficha({ ruta, onVerMapa }: Props) {
       </section>
 
       <section className="border-t border-borde px-5 py-4">
-        <h3 className="text-xs uppercase tracking-[0.16em] text-tenue">A tomar en cuenta</h3>
+        <h3 className="text-xs uppercase tracking-[0.16em] text-tenue">Good to know</h3>
         <ul className="mt-2 flex flex-col gap-1.5">
           {ruta.notas.map((nota) => (
             <li key={nota} className="flex gap-2 text-sm text-suave">
@@ -144,7 +156,7 @@ export default function Ficha({ ruta, onVerMapa }: Props) {
           ))}
         </ul>
         <p className="tabular mt-3 text-[11px] text-tenue">
-          Acceso aproximado: {ruta.acceso[0].toFixed(4)}, {ruta.acceso[1].toFixed(4)}
+          Approximate trailhead: {ruta.acceso[0].toFixed(4)}, {ruta.acceso[1].toFixed(4)}
         </p>
       </section>
     </article>
